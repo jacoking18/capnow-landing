@@ -16,6 +16,99 @@ function useCountUp(target: number, duration = 1400) {
   return v;
 }
 
+// --- Rocket Progress (Allocations toward target) ---
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+
+function formatMoney(n: number) {
+  return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(n);
+}
+
+function RocketProgress() {
+  const [current, setCurrent] = useState(0);
+  const [target, setTarget] = useState(100000);
+  const pct = Math.max(0, Math.min(1, target ? current / target : 0));
+
+  useEffect(() => {
+    async function load() {
+      try {
+        const r = await fetch("/progress.json", { cache: "no-store" });
+        if (r.ok) {
+          const j = await r.json();
+          setCurrent(Number(j.current || 0));
+          setTarget(Number(j.target || 100000));
+        }
+      } catch {}
+    }
+    load();
+    const id = setInterval(load, 60000); // refresh every 60s
+    return () => clearInterval(id);
+  }, []);
+
+  return (
+    <div className="mt-10 rounded-3xl border border-white/10 bg-gradient-to-br from-slate-900/60 to-slate-950/60 p-6">
+      <div className="flex items-end justify-between gap-4">
+        <div>
+          <div className="text-sm uppercase tracking-widest text-slate-400">CAPNOW PORTFOLIO • LIVE</div>
+          <h3 className="text-2xl md:text-3xl font-semibold mt-1">
+            {formatMoney(current)} committed of {formatMoney(target)}
+          </h3>
+          <p className="text-slate-400 text-sm mt-1">Be part of the first CAPNOW portfolio.</p>
+        </div>
+        <div className="text-right hidden sm:block">
+          <div className="text-3xl font-semibold">{Math.round(pct * 100)}%</div>
+          <div className="text-slate-400 text-xs">allocated</div>
+        </div>
+      </div>
+
+      {/* Track */}
+      <div className="mt-5 relative h-5 rounded-full bg-white/5 border border-white/10 overflow-hidden">
+        {/* Fill */}
+        <motion.div
+          initial={{ width: 0 }}
+          animate={{ width: `${pct * 100}%` }}
+          transition={{ type: "spring", stiffness: 140, damping: 20 }}
+          className="absolute inset-y-0 left-0 bg-emerald-500/70"
+        />
+        {/* Rocket */}
+        <motion.div
+          initial={{ x: 0 }}
+          animate={{ x: `calc(${pct * 100}% - 12px)` }}
+          transition={{ type: "spring", stiffness: 140, damping: 18 }}
+          className="absolute -top-3"
+        >
+          <div className="text-2xl">🚀</div>
+        </motion.div>
+
+        {/* tick marks */}
+        <div className="absolute inset-0 pointer-events-none">
+          {[0, .25, .5, .75, 1].map((p) => (
+            <div key={p}
+                 style={{ left: `${p * 100}%` }}
+                 className="absolute inset-y-0 w-px bg-white/15"/>
+          ))}
+        </div>
+      </div>
+
+      <div className="mt-2 flex justify-between text-xs text-slate-400">
+        <span>0</span>
+        <span>25k</span>
+        <span>50k</span>
+        <span>75k</span>
+        <span>100k</span>
+      </div>
+
+      {/* CTA */}
+      <div className="mt-6 flex flex-wrap items-center gap-3">
+        <a href="#interest" className="rounded-2xl bg-emerald-500 px-5 py-2 font-semibold hover:bg-emerald-400 transition">
+          Join the first portfolio
+        </a>
+        <span className="text-slate-400 text-sm">We update this bar as new commitments come in.</span>
+      </div>
+    </div>
+  );
+}
+
 export default function Page() {
   const [loading, setLoading] = useState(false);
   const [ok, setOk] = useState(false);
@@ -93,6 +186,9 @@ export default function Page() {
               Join the Investor List
             </a>
           </div>
+
+
+          <RocketProgress />   {/* <-- add this */}
         </div>
 
         {/* marquee */}
