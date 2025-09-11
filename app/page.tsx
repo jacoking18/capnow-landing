@@ -1,7 +1,9 @@
 "use client";
+
 import { motion, useAnimation, useInView } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
+/* -------------------- helpers -------------------- */
 function useCountUp(target: number, duration = 1400) {
   const [v, setV] = useState(0);
   useEffect(() => {
@@ -16,14 +18,15 @@ function useCountUp(target: number, duration = 1400) {
   return v;
 }
 
-// --- Rocket Progress (Allocations toward target) ---
-import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
-
 function formatMoney(n: number) {
-  return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(n);
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    maximumFractionDigits: 0,
+  }).format(n);
 }
 
+/* -------------------- rocket progress -------------------- */
 function RocketProgress() {
   const [current, setCurrent] = useState(0);
   const [target, setTarget] = useState(100000);
@@ -49,11 +52,15 @@ function RocketProgress() {
     <div className="mt-10 rounded-3xl border border-white/10 bg-gradient-to-br from-slate-900/60 to-slate-950/60 p-6">
       <div className="flex items-end justify-between gap-4">
         <div>
-          <div className="text-sm uppercase tracking-widest text-slate-400">CAPNOW PORTFOLIO • LIVE</div>
+          <div className="text-sm uppercase tracking-widest text-slate-400">
+            CAPNOW PORTFOLIO • LIVE
+          </div>
           <h3 className="text-2xl md:text-3xl font-semibold mt-1">
             {formatMoney(current)} committed of {formatMoney(target)}
           </h3>
-          <p className="text-slate-400 text-sm mt-1">Be part of the first CAPNOW portfolio.</p>
+          <p className="text-slate-400 text-sm mt-1">
+            Be part of the first CAPNOW portfolio.
+          </p>
         </div>
         <div className="text-right hidden sm:block">
           <div className="text-3xl font-semibold">{Math.round(pct * 100)}%</div>
@@ -82,10 +89,12 @@ function RocketProgress() {
 
         {/* tick marks */}
         <div className="absolute inset-0 pointer-events-none">
-          {[0, .25, .5, .75, 1].map((p) => (
-            <div key={p}
-                 style={{ left: `${p * 100}%` }}
-                 className="absolute inset-y-0 w-px bg-white/15"/>
+          {[0, 0.25, 0.5, 0.75, 1].map((p) => (
+            <div
+              key={p}
+              style={{ left: `${p * 100}%` }}
+              className="absolute inset-y-0 w-px bg-white/15"
+            />
           ))}
         </div>
       </div>
@@ -100,15 +109,21 @@ function RocketProgress() {
 
       {/* CTA */}
       <div className="mt-6 flex flex-wrap items-center gap-3">
-        <a href="#interest" className="rounded-2xl bg-emerald-500 px-5 py-2 font-semibold hover:bg-emerald-400 transition">
+        <a
+          href="#interest"
+          className="rounded-2xl bg-emerald-500 px-5 py-2 font-semibold hover:bg-emerald-400 transition"
+        >
           Join the first portfolio
         </a>
-        <span className="text-slate-400 text-sm">We update this bar as new commitments come in.</span>
+        <span className="text-slate-400 text-sm">
+          We update this bar as new commitments come in.
+        </span>
       </div>
     </div>
   );
 }
 
+/* -------------------- page -------------------- */
 export default function Page() {
   const [loading, setLoading] = useState(false);
   const [ok, setOk] = useState(false);
@@ -116,11 +131,18 @@ export default function Page() {
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setErr(null); setOk(false); setLoading(true);
-    const res = await fetch("/api/lead", { method: "POST", body: new FormData(e.currentTarget) });
+    setErr(null);
+    setOk(false);
+    setLoading(true);
+    const res = await fetch("/api/lead", {
+      method: "POST",
+      body: new FormData(e.currentTarget),
+    });
     setLoading(false);
-    if (res.ok) { setOk(true); (e.target as HTMLFormElement).reset(); }
-    else setErr(await res.text());
+    if (res.ok) {
+      setOk(true);
+      (e.target as HTMLFormElement).reset();
+    } else setErr(await res.text());
   }
 
   return (
@@ -130,11 +152,20 @@ export default function Page() {
         <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
           <div className="font-semibold tracking-tight">CAPNOW</div>
           <nav className="hidden md:flex items-center gap-6 text-sm text-slate-300">
-            <a href="#why" className="hover:text-white">Why CapNow</a>
-            <a href="#kpis" className="hover:text-white">Results</a>
-            <a href="#interest" className="hover:text-white">Invest</a>
+            <a href="#why" className="hover:text-white">
+              Why CapNow
+            </a>
+            <a href="#kpis" className="hover:text-white">
+              Results
+            </a>
+            <a href="#interest" className="hover:text-white">
+              Invest
+            </a>
           </nav>
-          <a href="#interest" className="rounded-xl bg-emerald-500 px-4 py-2 text-sm font-semibold hover:bg-emerald-400 transition">
+          <a
+            href="#interest"
+            className="rounded-xl bg-emerald-500 px-4 py-2 text-sm font-semibold hover:bg-emerald-400 transition"
+          >
             I’m Interested
           </a>
         </div>
@@ -159,36 +190,51 @@ export default function Page() {
 
         <div className="mx-auto max-w-6xl px-4 pt-24 pb-16 lg:pt-32 lg:pb-24">
           <motion.h1
-            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }} transition={{ duration: 0.7 }}
-            className="text-4xl md:text-6xl font-semibold tracking-tight">
-            Invest in Growth,<br className="hidden md:block" /> Powered by Real Returns
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+            className="text-4xl md:text-6xl font-semibold tracking-tight"
+          >
+            Invest in Growth,<br className="hidden md:block" /> Powered by Real
+            Returns
           </motion.h1>
 
           <motion.p
-            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }} transition={{ duration: 0.8, delay: 0.1 }}
-            className="mt-4 text-lg md:text-xl text-slate-300 max-w-2xl">
-            CapNow Portfolio 2025 — backed by <span className="text-emerald-400 font-medium">$44M+</span> funded to date.
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.1 }}
+            className="mt-4 text-lg md:text-xl text-slate-300 max-w-2xl"
+          >
+            CapNow Portfolio 2025 — backed by{" "}
+            <span className="text-emerald-400 font-medium">$44M+</span> funded
+            to date.
           </motion.p>
 
           <motion.div
-            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }} transition={{ duration: 0.8, delay: 0.15 }}
-            className="mt-8 flex flex-wrap gap-3 text-sm text-slate-300">
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.15 }}
+            className="mt-8 flex flex-wrap gap-3 text-sm text-slate-300"
+          >
             <Badge>Target 1-Year Term</Badge>
             <Badge>Compounded growth</Badge>
             <Badge>Investor-first UX</Badge>
           </motion.div>
 
           <div className="mt-10">
-            <a href="#interest" className="inline-flex items-center rounded-2xl bg-emerald-500 px-6 py-3 font-semibold hover:bg-emerald-400 transition">
+            <a
+              href="#interest"
+              className="inline-flex items-center rounded-2xl bg-emerald-500 px-6 py-3 font-semibold hover:bg-emerald-400 transition"
+            >
               Join the Investor List
             </a>
           </div>
 
-
-          <RocketProgress />   {/* <-- add this */}
+          {/* Rocket progress */}
+          <RocketProgress />
         </div>
 
         {/* marquee */}
@@ -208,9 +254,18 @@ export default function Page() {
       {/* WHY / value props */}
       <Section id="why" title="What you get">
         <div className="grid md:grid-cols-3 gap-4">
-          <Card title="Curated opportunities" body="Professionally screened opportunities aligned to our risk/return philosophy." />
-          <Card title="Automation & reporting" body="Clean dashboards, reminders, and distribution tracking tuned for investors." />
-          <Card title="Aligned incentives" body="We focus on execution and transparency—keeping investors first." />
+          <Card
+            title="Curated opportunities"
+            body="Professionally screened opportunities aligned to our risk/return philosophy."
+          />
+          <Card
+            title="Automation & reporting"
+            body="Clean dashboards, reminders, and distribution tracking tuned for investors."
+          />
+          <Card
+            title="Aligned incentives"
+            body="We focus on execution and transparency—keeping investors first."
+          />
         </div>
       </Section>
 
@@ -218,22 +273,31 @@ export default function Page() {
       <Section title="What investors say">
         <div className="overflow-hidden">
           <motion.div
-            initial={{ x: 0 }} animate={{ x: ["0%", "-50%"] }}
+            initial={{ x: 0 }}
+            animate={{ x: ["0%", "-50%"] }}
             transition={{ repeat: Infinity, duration: 18, ease: "linear" }}
-            className="flex gap-4 whitespace-nowrap">
+            className="flex gap-4 whitespace-nowrap"
+          >
             {[
               "“Super smooth process—fast responses.” — J.D.",
               "“Clear updates and strong ops.” — M.K.",
               "“Exactly the dashboard I wanted.” — R.S.",
               "“Professional and investor-centric.” — A.L.",
-            ].concat([
-              "“Super smooth process—fast responses.” — J.D.",
-              "“Clear updates and strong ops.” — M.K.",
-              "“Exactly the dashboard I wanted.” — R.S.",
-              "“Professional and investor-centric.” — A.L.",
-            ]).map((t, i) => (
-              <span key={i} className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-slate-300">{t}</span>
-            ))}
+            ]
+              .concat([
+                "“Super smooth process—fast responses.” — J.D.",
+                "“Clear updates and strong ops.” — M.K.",
+                "“Exactly the dashboard I wanted.” — R.S.",
+                "“Professional and investor-centric.” — A.L.",
+              ])
+              .map((t, i) => (
+                <span
+                  key={i}
+                  className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-slate-300"
+                >
+                  {t}
+                </span>
+              ))}
           </motion.div>
         </div>
       </Section>
@@ -243,7 +307,8 @@ export default function Page() {
         <div className="grid md:grid-cols-2 gap-10">
           <div>
             <p className="text-slate-300">
-              Add your details to receive the investor brief and next steps. This is not an offer of securities.
+              Add your details to receive the investor brief and next steps.
+              This is not an offer of securities.
             </p>
             <ul className="mt-6 space-y-2 text-slate-300 text-sm">
               <li>• Private updates and timelines</li>
@@ -255,42 +320,55 @@ export default function Page() {
           <div className="rounded-2xl border border-white/10 bg-slate-900/60 p-6 backdrop-blur">
             <form onSubmit={onSubmit} className="space-y-4">
               <Field label="Full name">
-                <input name="name" required placeholder="Jane Doe"
-                  className="w-full rounded-xl bg-slate-950 border border-white/10 px-4 py-3 outline-none focus:ring-2 focus:ring-emerald-500" />
+                <input
+                  name="name"
+                  required
+                  placeholder="Jane Doe"
+                  className="w-full rounded-xl bg-slate-950 border border-white/10 px-4 py-3 outline-none focus:ring-2 focus:ring-emerald-500"
+                />
               </Field>
               <Field label="Email">
-                <input type="email" name="email" required placeholder="you@company.com"
-                  className="w-full rounded-xl bg-slate-950 border border-white/10 px-4 py-3 outline-none focus:ring-2 focus:ring-emerald-500" />
+                <input
+                  type="email"
+                  name="email"
+                  required
+                  placeholder="you@company.com"
+                  className="w-full rounded-xl bg-slate-950 border border-white/10 px-4 py-3 outline-none focus:ring-2 focus:ring-emerald-500"
+                />
               </Field>
               <Field label="How much are you interested in allocating?">
-                <input inputMode="numeric" name="amount" required placeholder="$25,000"
-                  className="w-full rounded-xl bg-slate-950 border border-white/10 px-4 py-3 outline-none focus:ring-2 focus:ring-emerald-500" />
+                <input
+                  inputMode="numeric"
+                  name="amount"
+                  required
+                  placeholder="$25,000"
+                  className="w-full rounded-xl bg-slate-950 border border-white/10 px-4 py-3 outline-none focus:ring-2 focus:ring-emerald-500"
+                />
               </Field>
 
               <div className="flex items-start gap-2 text-xs text-slate-400">
                 <input type="checkbox" required className="mt-1" />
-                <span>I understand this page collects my info for contact. This is not an offer of securities.</span>
+                <span>
+                  I understand this page collects my info for contact. This is
+                  not an offer of securities.
+                </span>
               </div>
 
-              <button disabled={loading}
-                className="w-full rounded-2xl bg-emerald-500 py-3 font-semibold hover:bg-emerald-400 transition disabled:opacity-60">
+              <button
+                disabled={loading}
+                className="w-full rounded-2xl bg-emerald-500 py-3 font-semibold hover:bg-emerald-400 transition disabled:opacity-60"
+              >
                 {loading ? "Submitting…" : "Submit"}
               </button>
 
-              {ok && <p className="text-emerald-400 text-sm">Thanks—check your email soon.</p>}
+              {ok && (
+                <p className="text-emerald-400 text-sm">
+                  Thanks—check your email soon.
+                </p>
+              )}
               {err && <p className="text-rose-400 text-sm">{err}</p>}
             </form>
           </div>
-        </div>
-      </Section>
-
-      {/* FAQ (tight) */}
-      <Section title="FAQ">
-        <div className="grid md:grid-cols-2 gap-6 text-sm text-slate-300">
-          <FAQ q="Who can invest?" a="Accredited investors where applicable by law. This page is informational only and not an offer." />
-          <FAQ q="What’s the timeline?" a="We notify waitlist members with next steps and allocation windows." />
-          <FAQ q="How are updates shared?" a="You’ll receive private email updates and a lightweight dashboard experience." />
-          <FAQ q="How do I contact CapNow?" a="syndication@capnow.co" />
         </div>
       </Section>
 
@@ -300,7 +378,9 @@ export default function Page() {
           <p>© {new Date().getFullYear()} CAPNOW. All rights reserved.</p>
           <p className="mt-2">Contact: syndication@capnow.co</p>
           <p className="mt-2 text-xs text-slate-500">
-            Nothing herein is an offer to sell or solicitation to buy securities. Any offering will be made only to qualified investors via official documentation.
+            Nothing herein is an offer to sell or solicitation to buy securities.
+            Any offering will be made only to qualified investors via official
+            documentation.
           </p>
         </div>
       </footer>
@@ -308,33 +388,63 @@ export default function Page() {
   );
 }
 
-/* ---------- tiny components ---------- */
+/* -------------------- tiny components -------------------- */
 function Section({
-  id, title, children,
-}: { id?: string; title: string; children: React.ReactNode }) {
+  id,
+  title,
+  children,
+}: {
+  id?: string;
+  title: string;
+  children: React.ReactNode;
+}) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-10% 0px" });
   const controls = useAnimation();
-  useEffect(() => { if (inView) controls.start({ opacity: 1, y: 0 }); }, [inView, controls]);
+  useEffect(() => {
+    if (inView) controls.start({ opacity: 1, y: 0 });
+  }, [inView, controls]);
 
   return (
     <section id={id} ref={ref} className="mx-auto max-w-6xl px-4 py-16 md:py-24">
       <motion.h2
-        initial={{ opacity: 0, y: 12 }} animate={controls}
+        initial={{ opacity: 0, y: 12 }}
+        animate={controls}
         transition={{ duration: 0.5 }}
-        className="text-2xl md:text-3xl font-semibold tracking-tight mb-6">{title}</motion.h2>
-      <motion.div initial={{ opacity: 0, y: 16 }} animate={controls} transition={{ duration: 0.6 }}>
+        className="text-2xl md:text-3xl font-semibold tracking-tight mb-6"
+      >
+        {title}
+      </motion.h2>
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        animate={controls}
+        transition={{ duration: 0.6 }}
+      >
         {children}
       </motion.div>
     </section>
   );
 }
 
-function KPI({ label, value, prefix = "", suffix = "" }: { label: string; value: number; prefix?: string; suffix?: string; }) {
+function KPI({
+  label,
+  value,
+  prefix = "",
+  suffix = "",
+}: {
+  label: string;
+  value: number;
+  prefix?: string;
+  suffix?: string;
+}) {
   const n = useCountUp(value);
   return (
     <div className="rounded-xl border border-white/10 bg-slate-950/40 px-4 py-6">
-      <div className="text-3xl font-semibold">{prefix}{n}{suffix}</div>
+      <div className="text-3xl font-semibold">
+        {prefix}
+        {n}
+        {suffix}
+      </div>
       <div className="text-slate-400 mt-1 text-sm">{label}</div>
     </div>
   );
@@ -343,8 +453,10 @@ function KPI({ label, value, prefix = "", suffix = "" }: { label: string; value:
 function Card({ title, body }: { title: string; body: string }) {
   return (
     <motion.div
-      whileHover={{ y: -4 }} transition={{ type: "spring", stiffness: 280, damping: 20 }}
-      className="rounded-2xl border border-white/10 bg-slate-900/60 p-6 backdrop-blur">
+      whileHover={{ y: -4 }}
+      transition={{ type: "spring", stiffness: 280, damping: 20 }}
+      className="rounded-2xl border border-white/10 bg-slate-900/60 p-6 backdrop-blur"
+    >
       <div className="text-lg font-semibold">{title}</div>
       <p className="text-slate-300 mt-2 text-sm">{body}</p>
     </motion.div>
@@ -352,7 +464,11 @@ function Card({ title, body }: { title: string; body: string }) {
 }
 
 function Badge({ children }: { children: React.ReactNode }) {
-  return <span className="rounded-full border border-white/15 bg-white/5 px-3 py-1">{children}</span>;
+  return (
+    <span className="rounded-full border border-white/15 bg-white/5 px-3 py-1">
+      {children}
+    </span>
+  );
 }
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
@@ -379,11 +495,15 @@ function Marquee() {
     <div className="border-y border-white/10 bg-slate-900/40">
       <div className="mx-auto max-w-6xl px-4 py-4 overflow-hidden">
         <motion.div
-          initial={{ x: 0 }} animate={{ x: ["0%", "-50%"] }}
+          initial={{ x: 0 }}
+          animate={{ x: ["0%", "-50%"] }}
           transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
-          className="flex gap-8 text-slate-400 whitespace-nowrap">
+          className="flex gap-8 text-slate-400 whitespace-nowrap"
+        >
           {logos.concat(logos).map((l, i) => (
-            <span key={i} className="text-sm">{l}</span>
+            <span key={i} className="text-sm">
+              {l}
+            </span>
           ))}
         </motion.div>
       </div>
