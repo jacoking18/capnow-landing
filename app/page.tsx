@@ -76,15 +76,7 @@ function RocketProgress() {
           transition={{ type: "spring", stiffness: 140, damping: 20 }}
           className="absolute inset-y-0 left-0 bg-emerald-500/70"
         />
-        {/* rocket */}
-        <motion.div
-          initial={{ x: 0 }}
-          animate={{ x: `calc(${pct * 100}% - 12px)` }}
-          transition={{ type: "spring", stiffness: 140, damping: 18 }}
-          className="absolute -top-3"
-        >
-          <div className="text-2xl">🚀</div>
-        </motion.div>
+        {/* rocket removed as requested */}
 
         {/* ticks */}
         <div className="absolute inset-0 pointer-events-none">
@@ -471,6 +463,11 @@ function ProductStrip() {
     "SBA Processing",
     "Equipment Financing",
     "Lines of Credit",
+    "Real State Financing",
+    "Invoice Factoring",
+    "Invoice Factoring"
+
+
   ];
   return (
     <div className="border-y border-white/10 bg-slate-900/40">
