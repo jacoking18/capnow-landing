@@ -44,7 +44,7 @@ function RocketProgress() {
       } catch {}
     }
     load();
-    const id = setInterval(load, 60000); // refresh every 60s
+    const id = setInterval(load, 60000);
     return () => clearInterval(id);
   }, []);
 
@@ -68,16 +68,15 @@ function RocketProgress() {
         </div>
       </div>
 
-      {/* Track */}
+      {/* track */}
       <div className="mt-5 relative h-5 rounded-full bg-white/5 border border-white/10 overflow-hidden">
-        {/* Fill */}
         <motion.div
           initial={{ width: 0 }}
           animate={{ width: `${pct * 100}%` }}
           transition={{ type: "spring", stiffness: 140, damping: 20 }}
           className="absolute inset-y-0 left-0 bg-emerald-500/70"
         />
-        {/* Rocket */}
+        {/* rocket */}
         <motion.div
           initial={{ x: 0 }}
           animate={{ x: `calc(${pct * 100}% - 12px)` }}
@@ -87,7 +86,7 @@ function RocketProgress() {
           <div className="text-2xl">🚀</div>
         </motion.div>
 
-        {/* tick marks */}
+        {/* ticks */}
         <div className="absolute inset-0 pointer-events-none">
           {[0, 0.25, 0.5, 0.75, 1].map((p) => (
             <div
@@ -152,15 +151,10 @@ export default function Page() {
         <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
           <div className="font-semibold tracking-tight">CAPNOW</div>
           <nav className="hidden md:flex items-center gap-6 text-sm text-slate-300">
-            <a href="#why" className="hover:text-white">
-              Why CapNow
-            </a>
-            <a href="#kpis" className="hover:text-white">
-              Results
-            </a>
-            <a href="#interest" className="hover:text-white">
-              Invest
-            </a>
+            <a href="#why" className="hover:text-white">Why CapNow</a>
+            <a href="#kpis" className="hover:text-white">Results</a>
+            <a href="#about" className="hover:text-white">About</a>
+            <a href="#interest" className="hover:text-white">Invest</a>
           </nav>
           <a
             href="#interest"
@@ -196,8 +190,7 @@ export default function Page() {
             transition={{ duration: 0.7 }}
             className="text-4xl md:text-6xl font-semibold tracking-tight"
           >
-            Invest in Growth,<br className="hidden md:block" /> Powered by Real
-            Returns
+            Invest in Growth,<br className="hidden md:block" /> Powered by Real Returns
           </motion.h1>
 
           <motion.p
@@ -207,9 +200,8 @@ export default function Page() {
             transition={{ duration: 0.8, delay: 0.1 }}
             className="mt-4 text-lg md:text-xl text-slate-300 max-w-2xl"
           >
-            CapNow Portfolio 2025 — backed by{" "}
-            <span className="text-emerald-400 font-medium">$44M+</span> funded
-            to date.
+            CapNow Portfolio 2025 — backed by <span className="text-emerald-400 font-medium">$44M+</span> funded to date.<br />
+            Built for investors who understand risk and want diversified exposure to small-business finance.
           </motion.p>
 
           <motion.div
@@ -220,8 +212,8 @@ export default function Page() {
             className="mt-8 flex flex-wrap gap-3 text-sm text-slate-300"
           >
             <Badge>Target 1-Year Term</Badge>
-            <Badge>Compounded growth</Badge>
-            <Badge>Investor-first UX</Badge>
+            <Badge>Diversified allocations</Badge>
+            <Badge>Connect directly with the team</Badge>
           </motion.div>
 
           <div className="mt-10">
@@ -233,86 +225,85 @@ export default function Page() {
             </a>
           </div>
 
-          {/* Rocket progress */}
           <RocketProgress />
         </div>
 
-        {/* marquee */}
-        <Marquee />
+        {/* categories strip */}
+        <ProductStrip />
       </section>
 
       {/* KPIs */}
-      <Section id="kpis" title="Real-world traction">
+      <Section id="kpis" title="Results & reliability">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <KPI label="Capital deployed" value={44} prefix="$" suffix="M+" />
-          <KPI label="On-time distributions" value={98} suffix="%" />
+          <KPI label="$ funded to date" value={44} prefix="$" suffix="M+" />
+          <KPI label="On-time distributions (historical)" value={98} suffix="%" />
           <KPI label="Active deals tracked" value={120} suffix="+" />
-          <KPI label="Investor NPS" value={73} />
+          <KPI label="Investor satisfaction (NPS)" value={73} />
+        </div>
+        <div className="mt-6 text-sm text-slate-400 max-w-3xl">
+          <p>
+            <span className="font-medium text-slate-300">What “98% on-time distributions” means:</span>{" "}
+            historically, distributions we facilitate have been sent by their expected date
+            in 98% of cases. Past performance is not a guarantee of future results.
+          </p>
         </div>
       </Section>
 
-      {/* WHY / value props */}
-      <Section id="why" title="What you get">
+      {/* WHY */}
+      <Section id="why" title="How the portfolio works">
         <div className="grid md:grid-cols-3 gap-4">
           <Card
-            title="Curated opportunities"
-            body="Professionally screened opportunities aligned to our risk/return philosophy."
+            title="Diversified exposure"
+            body="Capital is deployed across multiple opportunities to reduce single-deal concentration risk."
           />
           <Card
-            title="Automation & reporting"
-            body="Clean dashboards, reminders, and distribution tracking tuned for investors."
+            title="Clear cadence"
+            body="The portfolio targets a 12-month cycle. Earnings are distributed once at month 12 from the start date."
           />
           <Card
-            title="Aligned incentives"
-            body="We focus on execution and transparency—keeping investors first."
+            title="Transparency"
+            body="You’ll receive concise updates and can connect directly with the team for questions at any time."
           />
         </div>
       </Section>
 
-      {/* Testimonials (auto-scrolling strip) */}
-      <Section title="What investors say">
-        <div className="overflow-hidden">
-          <motion.div
-            initial={{ x: 0 }}
-            animate={{ x: ["0%", "-50%"] }}
-            transition={{ repeat: Infinity, duration: 18, ease: "linear" }}
-            className="flex gap-4 whitespace-nowrap"
-          >
-            {[
-              "“Super smooth process—fast responses.” — J.D.",
-              "“Clear updates and strong ops.” — M.K.",
-              "“Exactly the dashboard I wanted.” — R.S.",
-              "“Professional and investor-centric.” — A.L.",
-            ]
-              .concat([
-                "“Super smooth process—fast responses.” — J.D.",
-                "“Clear updates and strong ops.” — M.K.",
-                "“Exactly the dashboard I wanted.” — R.S.",
-                "“Professional and investor-centric.” — A.L.",
-              ])
-              .map((t, i) => (
-                <span
-                  key={i}
-                  className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-slate-300"
-                >
-                  {t}
-                </span>
-              ))}
-          </motion.div>
+      {/* ABOUT */}
+      <Section id="about" title="About CapNow">
+        <div className="grid md:grid-cols-2 gap-8 text-slate-300">
+          <div className="space-y-4">
+            <p>
+              CapNow is a brokerage firm based in <span className="text-slate-100 font-medium">New York City</span>,
+              founded less than two years ago. We combine a technology-forward workflow with
+              practical financing expertise to source, evaluate, and track small-business funding
+              opportunities.
+            </p>
+            <p>
+              Using our operational systems and partner network, we can assemble a focused portfolio
+              where <span className="text-slate-100 font-medium">ROI potential can be attractive</span>. Returns are not
+              guaranteed—risk of loss exists—but our aim is to provide clear visibility and consistent execution.
+            </p>
+          </div>
+          <ul className="space-y-2 text-sm">
+            <li>• Based in NYC, operating nationally</li>
+            <li>• $44M+ in funding facilitated to date</li>
+            <li>• Portfolio concentrates on real-world SMB financing</li>
+            <li>• Direct communication with the CapNow team</li>
+          </ul>
         </div>
       </Section>
 
       {/* FORM */}
-      <Section id="interest" title="Get early access">
+      <Section id="interest" title="Connect with the team">
         <div className="grid md:grid-cols-2 gap-10">
-          <div>
-            <p className="text-slate-300">
-              Add your details to receive the investor brief and next steps.
-              This is not an offer of securities.
+          <div className="text-slate-300 space-y-3">
+            <p>
+              This opportunity is for individuals who understand risk and are prepared for the possibility of loss.
+              Submit your info to connect and discuss details. CapNow LLC reserves the right to approve or reject
+              any requests at its discretion.
             </p>
-            <ul className="mt-6 space-y-2 text-slate-300 text-sm">
-              <li>• Private updates and timelines</li>
-              <li>• Allocation reminders when pool opens</li>
+            <ul className="mt-4 space-y-2 text-sm">
+              <li>• Private briefing and next steps</li>
+              <li>• Timeline and allocation windows</li>
               <li>• Direct line to the CapNow team</li>
             </ul>
           </div>
@@ -349,8 +340,7 @@ export default function Page() {
               <div className="flex items-start gap-2 text-xs text-slate-400">
                 <input type="checkbox" required className="mt-1" />
                 <span>
-                  I understand this page collects my info for contact. This is
-                  not an offer of securities.
+                  I understand this page collects my info for contact. This is not an offer of securities.
                 </span>
               </div>
 
@@ -374,13 +364,13 @@ export default function Page() {
 
       {/* FOOTER */}
       <footer className="border-t border-white/10">
-        <div className="mx-auto max-w-6xl px-4 py-10 text-sm text-slate-400">
-          <p>© {new Date().getFullYear()} CAPNOW. All rights reserved.</p>
-          <p className="mt-2">Contact: syndication@capnow.co</p>
-          <p className="mt-2 text-xs text-slate-500">
-            Nothing herein is an offer to sell or solicitation to buy securities.
-            Any offering will be made only to qualified investors via official
-            documentation.
+        <div className="mx-auto max-w-6xl px-4 py-10 text-sm text-slate-400 space-y-2">
+          <p>© {new Date().getFullYear()} CAPNOW LLC. All rights reserved. Based in New York, NY.</p>
+          <p>Contact: syndication@capnow.co</p>
+          <p className="text-xs text-slate-500">
+            Nothing herein is an offer to sell or solicitation to buy securities. Any potential offering
+            would be made only to qualified investors via official documentation. All investments involve risk,
+            including possible loss of principal. CapNow LLC reserves the right to approve or reject any requests.
           </p>
         </div>
       </footer>
@@ -388,7 +378,7 @@ export default function Page() {
   );
 }
 
-/* -------------------- tiny components -------------------- */
+/* ---------- tiny components ---------- */
 function Section({
   id,
   title,
@@ -480,17 +470,14 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
   );
 }
 
-function FAQ({ q, a }: { q: string; a: string }) {
-  return (
-    <div className="rounded-xl border border-white/10 bg-slate-950/40 px-4 py-4">
-      <div className="font-medium">{q}</div>
-      <div className="text-slate-300 mt-1">{a}</div>
-    </div>
-  );
-}
-
-function Marquee() {
-  const logos = ["Motion", "Stripe", "Vercel", "AWS", "Google", "OpenAI"];
+function ProductStrip() {
+  const items = [
+    "MCA",
+    "Credit Card Processing",
+    "SBA Processing",
+    "Equipment Financing",
+    "Lines of Credit",
+  ];
   return (
     <div className="border-y border-white/10 bg-slate-900/40">
       <div className="mx-auto max-w-6xl px-4 py-4 overflow-hidden">
@@ -500,7 +487,7 @@ function Marquee() {
           transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
           className="flex gap-8 text-slate-400 whitespace-nowrap"
         >
-          {logos.concat(logos).map((l, i) => (
+          {items.concat(items).map((l, i) => (
             <span key={i} className="text-sm">
               {l}
             </span>
