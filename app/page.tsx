@@ -240,13 +240,7 @@ export default function Page() {
           <KPI label="Monthly Active deals tracked" value={450} suffix="+" />
           <KPI label="Small businesses supported to date" value={400} suffix="+" />
         </div>
-        <div className="mt-6 text-sm text-slate-400 max-w-3xl">
-          <p>
-            <span className="font-medium text-slate-300">What “98% on-time distributions” means:</span>{" "}
-            historically, distributions we facilitate have been sent by their expected date
-            in 98% of cases. Past performance is not a guarantee of future results.
-          </p>
-        </div>
+        {/* Explanatory section removed as requested */}
       </Section>
 
       {/* WHY */}
