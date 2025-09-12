@@ -151,7 +151,7 @@ export default function Page() {
         <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
           <div className="font-semibold tracking-tight">CAPNOW</div>
           <nav className="hidden md:flex items-center gap-6 text-sm text-slate-300">
-            <a href="#why" className="hover:text-white">Why CapNow</a>
+            <a href="#why" className="hover:text-white">Why Capnow</a>
             <a href="#kpis" className="hover:text-white">Results</a>
             <a href="#about" className="hover:text-white">About</a>
             <a href="#interest" className="hover:text-white">Invest</a>
@@ -200,7 +200,7 @@ export default function Page() {
             transition={{ duration: 0.8, delay: 0.1 }}
             className="mt-4 text-lg md:text-xl text-slate-300 max-w-2xl"
           >
-            CapNow Portfolio 2025 — backed by <span className="text-emerald-400 font-medium">$44M+</span> funded to date.<br />
+            Capnow Portfolio 2025 — backed by <span className="text-emerald-400 font-medium">$44M+</span> funded to date.<br />
             Built for investors who understand risk and want diversified exposure to small-business finance.
           </motion.p>
 
@@ -236,9 +236,9 @@ export default function Page() {
       <Section id="kpis" title="Results & reliability">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <KPI label="$ funded to date" value={44} prefix="$" suffix="M+" />
-          <KPI label="On-time distributions (historical)" value={98} suffix="%" />
-          <KPI label="Active deals tracked" value={120} suffix="+" />
-          <KPI label="Investor satisfaction (NPS)" value={73} />
+          <KPI label="Products we offer" value={8} suffix="+" />
+          <KPI label="Monthly Active deals tracked" value={450} suffix="+" />
+          <KPI label="Small businesses supported to date" value={400} suffix="+" />
         </div>
         <div className="mt-6 text-sm text-slate-400 max-w-3xl">
           <p>
@@ -268,11 +268,11 @@ export default function Page() {
       </Section>
 
       {/* ABOUT */}
-      <Section id="about" title="About CapNow">
+  <Section id="about" title="About Capnow">
         <div className="grid md:grid-cols-2 gap-8 text-slate-300">
           <div className="space-y-4">
             <p>
-              CapNow is a brokerage firm based in <span className="text-slate-100 font-medium">New York City</span>,
+              Capnow is a brokerage firm based in <span className="text-slate-100 font-medium">New York City</span>,
               founded less than two years ago. We combine a technology-forward workflow with
               practical financing expertise to source, evaluate, and track small-business funding
               opportunities.
@@ -285,9 +285,9 @@ export default function Page() {
           </div>
           <ul className="space-y-2 text-sm">
             <li>• Based in NYC, operating nationally</li>
-            <li>• $44M+ in funding facilitated to date</li>
+            <li>• $44M+ in funding to date</li>
             <li>• Portfolio concentrates on real-world SMB financing</li>
-            <li>• Direct communication with the CapNow team</li>
+            <li>• Direct communication with the Capnow team</li>
           </ul>
         </div>
       </Section>
@@ -298,13 +298,13 @@ export default function Page() {
           <div className="text-slate-300 space-y-3">
             <p>
               This opportunity is for individuals who understand risk and are prepared for the possibility of loss.
-              Submit your info to connect and discuss details. CapNow LLC reserves the right to approve or reject
+              Submit your info to connect and discuss details. Capnow LLC reserves the right to approve or reject
               any requests at its discretion.
             </p>
             <ul className="mt-4 space-y-2 text-sm">
               <li>• Private briefing and next steps</li>
               <li>• Timeline and allocation windows</li>
-              <li>• Direct line to the CapNow team</li>
+              <li>• Direct line to the Capnow team</li>
             </ul>
           </div>
 
@@ -370,7 +370,7 @@ export default function Page() {
           <p className="text-xs text-slate-500">
             Nothing herein is an offer to sell or solicitation to buy securities. Any potential offering
             would be made only to qualified investors via official documentation. All investments involve risk,
-            including possible loss of principal. CapNow LLC reserves the right to approve or reject any requests.
+            including possible loss of principal. Capnow LLC reserves the right to approve or reject any requests.
           </p>
         </div>
       </footer>
