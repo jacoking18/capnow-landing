@@ -245,8 +245,8 @@ export default function Page() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <KPI label="Businesses Funded" value={2847} suffix="+" />
           <KPI label="Capital Deployed" value={487} prefix="$" suffix="M+" />
-          <KPI label="Active Partners" value={32} suffix="+" />
-          <KPI label="Avg. Approval Time" value={2} suffix="hrs" />
+          <KPI label="Customer Satisfaction" value={94} suffix="%" />
+          <KPI label="Years of Experience" value={12} suffix="hrs" />
         </div>
         {/* Explanatory section removed as requested */}
       </Section>
