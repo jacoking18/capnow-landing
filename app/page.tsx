@@ -282,8 +282,8 @@ export default function Page() {
           <ul className="space-y-2 text-sm">
             <li>• 2,847 businesses funded nationwide</li>
             <li>• $487M+ capital deployed</li>
-            <li>• 32+ active funding partners</li>
-            <li>• Average approval time: 2 hours</li>
+            <li>• 94% Client Satisfaction</li>
+            <li>• 12 Years of experience</li>
           </ul>
         </div>
       </Section>
