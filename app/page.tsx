@@ -246,7 +246,7 @@ export default function Page() {
           <KPI label="Businesses Funded" value={2847} suffix="+" />
           <KPI label="Capital Deployed" value={487} prefix="$" suffix="M+" />
           <KPI label="Customer Satisfaction" value={94} suffix="%" />
-          <KPI label="Years of Experience" value={12} suffix="hrs" />
+          <KPI label="Years of Experience" value={12} suffix=" " />
         </div>
         {/* Explanatory section removed as requested */}
       </Section>
