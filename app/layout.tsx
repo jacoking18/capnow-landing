@@ -16,6 +16,16 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Capnow Invest", // This is what shows in the browser tab
   description: "Invest in Growth, Powered by Real Returns",
+  openGraph: {
+    images: [
+      {
+        url: "/og-logo.png",
+        width: 1200,
+        height: 630,
+        alt: "Capnow Logo",
+      },
+    ],
+  },
 };
 
 export default function RootLayout({
