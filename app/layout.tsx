@@ -12,8 +12,10 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+// ✅ Update tab title and description
 export const metadata: Metadata = {
-  title: "Capnow",
+  title: "Capnow Invest", // This is what shows in the browser tab
+  description: "Invest in Growth, Powered by Real Returns",
 };
 
 export default function RootLayout({
@@ -24,6 +26,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        {/* ✅ Use your uploaded favicon */}
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
       </head>
       <body
