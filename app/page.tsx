@@ -273,7 +273,7 @@ export default function Page() {
           <div className="space-y-4">
             <p>
               <span className="text-slate-100 font-medium">Empowering Business Growth Since 2022</span><br />
-              Capnow is a technology-driven brokerage firm headquartered in New York City. Since our founding, we've helped thousands of businesses access the capital they need to grow, hire, and innovate.
+              Capnow is a technology-driven brokerage firm headquartered in New York City. Since our founding, we&apos;ve helped thousands of businesses access the capital they need to grow, hire, and innovate.
             </p>
             <p>
               Our platform streamlines the funding process, connecting entrepreneurs with tailored financial solutions in record time. We believe in transparency, reliability, and building lasting partnerships that drive real-world results.
@@ -437,18 +437,6 @@ function KPI({
   );
 }
 
-function Card({ title, body }: { title: string; body: string }) {
-  return (
-    <motion.div
-      whileHover={{ y: -4 }}
-      transition={{ type: "spring", stiffness: 280, damping: 20 }}
-      className="rounded-2xl border border-white/10 bg-slate-900/60 p-6 backdrop-blur"
-    >
-      <div className="text-lg font-semibold">{title}</div>
-      <p className="text-slate-300 mt-2 text-sm">{body}</p>
-    </motion.div>
-  );
-}
 
 function Badge({ children }: { children: React.ReactNode }) {
   return (
