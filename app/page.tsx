@@ -243,29 +243,27 @@ export default function Page() {
       {/* KPIs */}
       <Section id="kpis" title="Results & reliability">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <KPI label="$ funded to date" value={44} prefix="$" suffix="M+" />
-          <KPI label="Products we offer" value={8} suffix="+" />
-          <KPI label="Monthly Active deals tracked" value={450} suffix="+" />
-          <KPI label="Small businesses supported to date" value={400} suffix="+" />
+          <KPI label="Businesses Funded" value={2847} suffix="+" />
+          <KPI label="Capital Deployed" value={487} prefix="$" suffix="M+" />
+          <KPI label="Active Partners" value={32} suffix="+" />
+          <KPI label="Avg. Approval Time" value={2} suffix="hrs" />
         </div>
         {/* Explanatory section removed as requested */}
       </Section>
 
       {/* WHY */}
-      <Section id="why" title="How the portfolio works">
-        <div className="grid md:grid-cols-3 gap-4">
-          <Card
-            title="Diversified exposure"
-            body="Capital is deployed across multiple opportunities to reduce single-deal concentration risk."
-          />
-          <Card
-            title="Clear cadence"
-            body="The portfolio targets a 12-month cycle. Earnings are distributed once at month 12 from the start date."
-          />
-          <Card
-            title="Transparency"
-            body="You’ll receive concise updates and can connect directly with the team for questions at any time."
-          />
+      <Section id="mission" title="Our Mission">
+        <div className="space-y-4 text-slate-300">
+          <p>
+            <span className="text-slate-100 font-medium">Mission:</span> To unlock growth for small businesses by making capital accessible, fast, and simple.
+          </p>
+          <ul className="space-y-2 text-sm">
+            <li>• Fast, tech-enabled funding decisions</li>
+            <li>• Dedicated support from real people</li>
+            <li>• Transparent terms and process</li>
+            <li>• Flexible solutions for unique business needs</li>
+            <li>• Trusted by thousands of entrepreneurs</li>
+          </ul>
         </div>
       </Section>
 
@@ -274,22 +272,18 @@ export default function Page() {
         <div className="grid md:grid-cols-2 gap-8 text-slate-300">
           <div className="space-y-4">
             <p>
-              Capnow is a brokerage firm based in <span className="text-slate-100 font-medium">New York City</span>,
-              founded less than two years ago. We combine a technology-forward workflow with
-              practical financing expertise to source, evaluate, and track small-business funding
-              opportunities.
+              <span className="text-slate-100 font-medium">Empowering Business Growth Since 2022</span><br />
+              Capnow is a technology-driven brokerage firm headquartered in New York City. Since our founding, we've helped thousands of businesses access the capital they need to grow, hire, and innovate.
             </p>
             <p>
-              Using our operational systems and partner network, we can assemble a focused portfolio
-              where <span className="text-slate-100 font-medium">ROI potential can be attractive</span>. Returns are not
-              guaranteed—risk of loss exists—but our aim is to provide clear visibility and consistent execution.
+              Our platform streamlines the funding process, connecting entrepreneurs with tailored financial solutions in record time. We believe in transparency, reliability, and building lasting partnerships that drive real-world results.
             </p>
           </div>
           <ul className="space-y-2 text-sm">
-            <li>• Based in NYC, operating nationally</li>
-            <li>• $44M+ in funding to date</li>
-            <li>• Portfolio concentrates on real-world SMB financing</li>
-            <li>• Direct communication with the Capnow team</li>
+            <li>• 2,847 businesses funded nationwide</li>
+            <li>• $487M+ capital deployed</li>
+            <li>• 32+ active funding partners</li>
+            <li>• Average approval time: 2 hours</li>
           </ul>
         </div>
       </Section>
