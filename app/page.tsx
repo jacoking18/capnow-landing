@@ -458,14 +458,15 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
 
 function ProductStrip() {
   const items = [
-    "MCA",
+    "Revenue Based Financing",
     "Credit Card Processing",
     "SBA Processing",
     "Equipment Financing",
     "Lines of Credit",
     "Real State Financing",
     "Invoice Factoring",
-    "Invoice Factoring"
+    "Business Term Loans",
+    "Credit Repair"
 
 
   ];
