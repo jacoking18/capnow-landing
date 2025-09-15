@@ -2,6 +2,7 @@
 
 import { motion, useAnimation, useInView } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import { supabase } from "../lib/supabaseClient";
 
 /* -------------------- helpers -------------------- */
 function useCountUp(target: number, duration = 1400) {
@@ -120,20 +121,35 @@ export default function Page() {
   const [ok, setOk] = useState(false);
   const [err, setErr] = useState<string | null>(null);
 
-  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setErr(null);
-    setOk(false);
     setLoading(true);
-    const res = await fetch("/api/lead", {
-      method: "POST",
-      body: new FormData(e.currentTarget),
-    });
-    setLoading(false);
-    if (res.ok) {
+    setErr(null);
+
+    const formData = new FormData(e.currentTarget);
+    const name = formData.get("name") as string;
+    const email = formData.get("email") as string;
+    const amount = formData.get("amount") as string;
+
+    // Insert into Supabase
+    const { error } = await supabase.from("leads").insert([
+      {
+        name,
+        email,
+        amount: parseFloat(amount),
+        source: "landing-page",
+      },
+    ]);
+
+    if (error) {
+      console.error(error);
+      setErr(error.message);
+    } else {
       setOk(true);
       (e.target as HTMLFormElement).reset();
-    } else setErr(await res.text());
+    }
+
+    setLoading(false);
   }
 
   return (
@@ -295,9 +311,10 @@ export default function Page() {
           </div>
 
           <div className="rounded-2xl border border-white/10 bg-slate-900/60 p-6 backdrop-blur">
-            <form onSubmit={onSubmit} className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-4">
               <Field label="Full name">
                 <input
+                  type="text"
                   name="name"
                   required
                   placeholder="Jane Doe"
@@ -315,7 +332,7 @@ export default function Page() {
               </Field>
               <Field label="How much are you interested in allocating?">
                 <input
-                  inputMode="numeric"
+                  type="number"
                   name="amount"
                   required
                   placeholder="$25,000"
