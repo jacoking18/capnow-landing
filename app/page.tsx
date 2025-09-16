@@ -164,12 +164,20 @@ export default function Page() {
             <a href="#about" className="hover:text-white">About</a>
             <a href="#interest" className="hover:text-white">Invest</a>
           </nav>
-          <a
-            href="#interest"
-            className="rounded-xl bg-emerald-500 px-4 py-2 text-sm font-semibold hover:bg-emerald-400 transition"
-          >
-            I’m Interested
-          </a>
+          <div className="flex items-center gap-2">
+            <a
+              href="#interest"
+              className="rounded-xl bg-emerald-500 px-3 py-1.5 text-xs font-semibold hover:bg-emerald-400 transition"
+            >
+              I’m Interested
+            </a>
+            <a
+              href="/dashboard"
+              className="rounded-xl bg-cyan-500 px-3 py-1.5 text-xs font-semibold hover:bg-cyan-400 transition"
+            >
+              Investor Dashboard
+            </a>
+          </div>
         </div>
       </header>
 
