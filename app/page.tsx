@@ -260,7 +260,7 @@ export default function Page() {
       </Section>
 
       {/* WHY */}
-      <Section id="mission" title="Our Mission">
+      <Section id="mission" title=" Our Mission">
         <div className="space-y-4 text-slate-300">
           <p>
             <span className="text-slate-100 font-medium">Mission:</span> To unlock growth for small businesses by making capital accessible, fast, and simple.
